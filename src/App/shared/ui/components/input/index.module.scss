@@ -1,0 +1,9 @@
+@use '/src/theme' as vars;
+
+.common {
+  width: 100%;
+  height: 45px;
+  position: relative;
+  border-radius: 15px;
+  border: 1px solid vars.$border-primary;
+}
