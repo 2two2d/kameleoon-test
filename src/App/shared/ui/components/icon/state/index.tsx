@@ -1,8 +1,12 @@
-import { SearchIcon } from '@shared/ui/assets/icons'
+import { ArrowBottomIcon, ArrowTopIcon, SearchIcon } from '@shared/ui/assets/icons'
 
 const ICONS = {
   base: {
-    search: SearchIcon,
+    search: <SearchIcon />,
+  },
+  arrows: {
+    top: <ArrowTopIcon />,
+    bottom: <ArrowBottomIcon />,
   }
 } as const
 

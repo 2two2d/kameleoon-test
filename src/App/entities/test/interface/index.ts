@@ -8,4 +8,8 @@ interface ITestDto {
   siteId: number
 }
 
-export type { ITestDto }
+interface ITestTableItem extends Omit<ITestDto, 'siteId'> {
+  site: string
+}
+
+export type { ITestDto, ITestTableItem }

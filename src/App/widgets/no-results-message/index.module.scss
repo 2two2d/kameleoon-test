@@ -1,0 +1,12 @@
+@use "/src/theme" as vars;
+
+.common {
+  gap: 61px;
+  align-items: center;
+
+  &.message {
+    color: vars.$text-dark;
+    font-size: 18px;
+    font-weight: 500;
+  }
+}
