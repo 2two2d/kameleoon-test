@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 
 interface ITableDataGenericExtender {
   id: string | number
+  accentColor?: string
 }
 
 interface ITableColumn<T> {

@@ -1,16 +1,27 @@
-import type { ITestDto } from '@entities'
+import { formatURL, getRandomHexColor } from '@shared/utils'
 
-type ISortableField = keyof Pick<ITestDto, 'type' | 'name' | 'status' | 'siteId'>
+import type { ISiteDto, ITestDto, ITestTableItem } from '@entities'
 
-const sortTests = (tests: ITestDto[], field: ISortableField): ITestDto[] => {
-  return tests.slice().sort((a, b) => {
-    const formatedA = a[field].toString().toLowerCase()
-    const formatedB = b[field].toString().toLowerCase()
+interface IUniqSite {
+  [key: string]: string
+}
 
-    if (formatedA === formatedB) return 0
+const formatSites = (tests: ITestDto[], sites: ISiteDto[]): ITestTableItem[] => {
+  const uniqSites: IUniqSite = {}
 
-    return formatedA < formatedB ? -1 : 1
+  const testsWithFormatedSites = tests.map((testItem) => {
+    return { ...testItem, site: formatURL(sites.find((siteItem) => siteItem.id === testItem.siteId)?.url ?? '') }
+  })
+
+  testsWithFormatedSites.forEach((item) => {
+    if (!Object.keys(uniqSites).includes(item.site)) {
+      uniqSites[item.site] = getRandomHexColor()
+    }
+  })
+
+  return testsWithFormatedSites.map((item) => {
+    return { ...item, accentColor: uniqSites[item.site] }
   })
 }
 
-export { sortTests }
+export { formatSites }

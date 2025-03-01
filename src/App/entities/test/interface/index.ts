@@ -10,6 +10,7 @@ interface ITestDto {
 
 interface ITestTableItem extends Omit<ITestDto, 'siteId'> {
   site: string
+  accentColor: string
 }
 
 export type { ITestDto, ITestTableItem }

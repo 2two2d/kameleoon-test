@@ -5,10 +5,11 @@ import { Icon } from '@shared/ui/components/icon'
 
 import styles from './index.module.scss'
 
-import type { ITableProps } from '@shared/ui/components/table/interface'
+import type { ITableDataGenericExtender, ITableProps } from '@shared/ui/components/table/interface'
+
 import type { ReactNode } from 'react'
 
-const Table = <T extends { id: string | number }>({
+const Table = <T extends ITableDataGenericExtender>({
   data,
   columns,
   className,
@@ -57,7 +58,7 @@ const Table = <T extends { id: string | number }>({
               }
 
               return (
-                <td key={ column.key.toString() }>
+                <td key={ column.key.toString() } style={{ borderColor: item.accentColor }}>
                   { column.key === 'action'
                     ? column.render
                       ? column.render(item)

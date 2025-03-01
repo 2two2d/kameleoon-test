@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 
 import { ETestStatus, getSitesAllSlice, getTestsAllSlice } from '@entities'
-import { formatURL } from '@shared/utils/format-url'
 import RenderTestButton from '@features/render-test-button'
 
 import { debounce } from '@shared/utils/debounce'
+
+import { formatSites } from '@pages/main/presenter/helpers'
 
 import type { ITableColumn } from '@shared/ui/components/table/interface'
 import type { ITestTableItem } from '@entities'
@@ -89,9 +90,7 @@ const useMainPagePresenter = (): IUseMainPagePresenterReturn => {
   useEffect(() => {
     getTestsAllSlice().then((resTests) => {
       getSitesAllSlice().then((resSites) => {
-        setTests(resTests.map((testItem) => {
-          return { ...testItem, site: formatURL(resSites.find((siteItem) => siteItem.id === testItem.siteId)?.url ?? '') }
-        }))
+        setTests(formatSites(resTests, resSites))
       }).catch((err) => {
         console.log(err)
       })
